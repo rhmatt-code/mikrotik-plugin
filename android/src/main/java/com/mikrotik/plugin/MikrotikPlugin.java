@@ -586,31 +586,51 @@ public class MikrotikPlugin extends Plugin {
 
   @PluginMethod
   public void EditHotspot(PluginCall call){
+
     JSObject ret = new JSObject();
 
     new Thread(() -> {
 
       try {
 
-        String oldName = call.getString("name");
+        String name = call.getString("name");
         String password = call.getString("password");
         String profile = call.getString("profileNew");
 
+        List<Map<String,String>> users =
+          con.execute("/ip/hotspot/user/print");
+
+        String id = "";
+
+        for(Map<String,String> u : users){
+          if(name.equals(u.get("name"))){
+            id = u.get(".id");
+            break;
+          }
+        }
+
+        if(id.equals("")){
+          ret.put("success", false);
+          ret.put("error", "user tidak ditemukan");
+          call.resolve(ret);
+          return;
+        }
+
         String cmd =
-          "/ip/hotspot/set " +
-            ".id=" + oldName + " " +
+          "/ip/hotspot/user/set " +
+            ".id=" + id + " " +
             "password=" + password + " " +
             "profile=" + profile;
 
         con.execute(cmd);
 
         ret.put("success", true);
-        ret.put("message", "Hotspot berhasil diupdate");
 
-      } catch (Exception e) {
+      } catch(Exception e){
 
         ret.put("success", false);
         ret.put("error", e.toString());
+
       }
 
       call.resolve(ret);
@@ -619,7 +639,7 @@ public class MikrotikPlugin extends Plugin {
   }
 
   @PluginMethod
-  public void deleteHotspot(PluginCall call) {
+  public void deleteHotspot(PluginCall call){
 
     JSObject ret = new JSObject();
 
@@ -629,19 +649,36 @@ public class MikrotikPlugin extends Plugin {
 
         String name = call.getString("name");
 
-        String cmd =
-          "/ip/hotspot/remove " +
-            ".id=" + name;
+        List<Map<String,String>> users =
+          con.execute("/ip/hotspot/user/print");
 
-        con.execute(cmd);
+        String id = "";
+
+        for(Map<String,String> u : users){
+          if(name.equals(u.get("name"))){
+            id = u.get(".id");
+            break;
+          }
+        }
+
+        if(id.equals("")){
+          ret.put("success", false);
+          ret.put("error", "user tidak ditemukan");
+          call.resolve(ret);
+          return;
+        }
+
+        con.execute(
+          "/ip/hotspot/user/remove .id=" + id
+        );
 
         ret.put("success", true);
-        ret.put("message", "Hotspot berhasil dihapus");
 
-      } catch (Exception e) {
+      } catch(Exception e){
 
         ret.put("success", false);
         ret.put("error", e.toString());
+
       }
 
       call.resolve(ret);

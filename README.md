@@ -40,6 +40,10 @@ npx cap sync
 * [`addHotspotProfile(...)`](#addhotspotprofile)
 * [`generateHotspotVouchers(...)`](#generatehotspotvouchers)
 * [`getHotspotProfiles()`](#gethotspotprofiles)
+* [`editPPoE(...)`](#editppoe)
+* [`deletePPoE(...)`](#deleteppoe)
+* [`EditHotspot(...)`](#edithotspot)
+* [`deleteHotspot(...)`](#deletehotspot)
 
 </docgen-index>
 
@@ -218,6 +222,66 @@ generateHotspotVouchers(option: any) => Promise<any>
 ```typescript
 getHotspotProfiles() => Promise<any>
 ```
+
+**Returns:** <code>Promise&lt;any&gt;</code>
+
+--------------------
+
+
+### editPPoE(...)
+
+```typescript
+editPPoE(data: { name: string; profileNew: string; }) => Promise<any>
+```
+
+| Param      | Type                                               |
+| ---------- | -------------------------------------------------- |
+| **`data`** | <code>{ name: string; profileNew: string; }</code> |
+
+**Returns:** <code>Promise&lt;any&gt;</code>
+
+--------------------
+
+
+### deletePPoE(...)
+
+```typescript
+deletePPoE(data: { name: string; }) => Promise<any>
+```
+
+| Param      | Type                           |
+| ---------- | ------------------------------ |
+| **`data`** | <code>{ name: string; }</code> |
+
+**Returns:** <code>Promise&lt;any&gt;</code>
+
+--------------------
+
+
+### EditHotspot(...)
+
+```typescript
+EditHotspot(data: { name: string; password: string; profileNew: string; }) => Promise<any>
+```
+
+| Param      | Type                                                                 |
+| ---------- | -------------------------------------------------------------------- |
+| **`data`** | <code>{ name: string; password: string; profileNew: string; }</code> |
+
+**Returns:** <code>Promise&lt;any&gt;</code>
+
+--------------------
+
+
+### deleteHotspot(...)
+
+```typescript
+deleteHotspot(data: { name: string; }) => Promise<any>
+```
+
+| Param      | Type                           |
+| ---------- | ------------------------------ |
+| **`data`** | <code>{ name: string; }</code> |
 
 **Returns:** <code>Promise&lt;any&gt;</code>
 

@@ -15,6 +15,6 @@ export interface MikrotikPlugin {
   getHotspotProfiles(): Promise<any>;
   editPPoE(data: {name: string; profileNew: string;}): Promise<any>;
   deletePPoE(data: {name: string;}): Promise<any>;
-  editHotspot(data: {name: string; password: string; profileNew: string;}): Promise<any>;
+  EditHotspot(data: {name: string; password: string; profileNew: string;}): Promise<any>;
   deleteHotspot(data: {name: string;}): Promise<any>;
 }

@@ -67,7 +67,7 @@ export class MikrotikPluginWeb extends WebPlugin implements MikrotikPlugin {
     throw this.unimplemented('Not implemented on web.');
   }
 
-  async editHotspot(): Promise<any>{
+  async EditHotspot(): Promise<any>{
     throw this.unimplemented('Not implemented on web.');
   }
   
